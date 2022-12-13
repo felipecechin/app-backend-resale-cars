@@ -23,7 +23,7 @@ export class Car1670952656739 implements MigrationInterface {
                     },
                     {
                         name: 'km',
-                        type: 'varchar',
+                        type: 'int',
                     },
                     {
                         name: 'color',

@@ -12,7 +12,7 @@ export class CarModel {
     model: string
 
     @Column()
-    km: string
+    km: number
 
     @Column()
     color: string
