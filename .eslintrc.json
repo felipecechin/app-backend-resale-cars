@@ -61,6 +61,7 @@
         "no-console": "off",
         "no-useless-constructor": "off",
         "no-empty-function": "off",
+        "@typescript-eslint/no-explicit-any": "off",
         "lines-between-class-members": "off",
         "import/extensions": [
             "error",
