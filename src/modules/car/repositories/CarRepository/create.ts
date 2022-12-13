@@ -5,8 +5,8 @@ import { ICreateCar } from '@/modules/car/types/createCar'
 
 export default async (data: ICreateCar): Promise<CarModel> => {
     try {
-        const createdUser = await dataRepositories.carRepository.save(data)
-        return createdUser
+        const createdCar = await dataRepositories.carRepository.save(data)
+        return createdCar
     } catch (error) {
         throw new HttpError(500, 'Error creating car')
     }
