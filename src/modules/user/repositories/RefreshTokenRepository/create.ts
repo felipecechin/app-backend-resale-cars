@@ -9,7 +9,6 @@ export default async (userId: number): Promise<string> => {
         })
         return createdRefreshToken.refreshToken
     } catch (error) {
-        console.log(error)
         throw new HttpError(500, 'Error creating refresh token')
     }
 }

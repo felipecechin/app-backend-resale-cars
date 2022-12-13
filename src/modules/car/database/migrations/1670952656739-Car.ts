@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-export class Todo1669630284577 implements MigrationInterface {
+export class Car1670952656739 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: 'todos',
+                name: 'cars',
                 columns: [
                     {
                         name: 'id',
@@ -14,30 +14,30 @@ export class Todo1669630284577 implements MigrationInterface {
                         generationStrategy: 'increment',
                     },
                     {
-                        name: 'description',
+                        name: 'brand',
                         type: 'varchar',
                     },
                     {
-                        name: 'createdAt',
-                        type: 'datetime',
-                        default: 'CURRENT_TIMESTAMP',
+                        name: 'model',
+                        type: 'varchar',
                     },
                     {
-                        name: 'startedAt',
-                        type: 'datetime',
+                        name: 'km',
+                        type: 'varchar',
+                    },
+                    {
+                        name: 'color',
+                        type: 'varchar',
+                    },
+                    {
+                        name: 'transmission',
+                        type: 'varchar',
+                    },
+                    {
+                        name: 'deleted_at',
+                        type: 'timestamp',
                         isNullable: true,
                         default: null,
-                    },
-                    {
-                        name: 'workTime',
-                        type: 'int',
-                        isNullable: true,
-                        default: null,
-                    },
-                    {
-                        name: 'done',
-                        type: 'boolean',
-                        default: false,
                     },
                 ],
             })
@@ -45,6 +45,6 @@ export class Todo1669630284577 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('todos')
+        await queryRunner.dropTable('cars')
     }
 }

@@ -2,11 +2,11 @@ import 'reflect-metadata'
 
 import { DataSource } from 'typeorm'
 
+import { ActionModel } from '@/modules/car/database/models/ActionModel'
+import { CarModel } from '@/modules/car/database/models/CarModel'
 import env from '@/env'
-
-import { RefreshTokenModel } from '../modules/user/database/models/RefreshTokenModel'
-import { TodoModel } from '../modules/todo/database/models/TodoModel'
-import { UserModel } from '../modules/user/database/models/UserModel'
+import { RefreshTokenModel } from '@/modules/user/database/models/RefreshTokenModel'
+import { UserModel } from '@/modules/user/database/models/UserModel'
 
 export const AppDataSource = new DataSource({
     type: 'mysql',
@@ -18,9 +18,10 @@ export const AppDataSource = new DataSource({
 })
 
 export const dataRepositories = {
-    todoRepository: AppDataSource.getRepository(TodoModel),
     userRepository: AppDataSource.getRepository(UserModel),
     refreshTokenRepository: AppDataSource.getRepository(RefreshTokenModel),
+    carRepository: AppDataSource.getRepository(CarModel),
+    actionRepository: AppDataSource.getRepository(ActionModel),
 }
 
 export const createConnection = async (): Promise<DataSource> => {
