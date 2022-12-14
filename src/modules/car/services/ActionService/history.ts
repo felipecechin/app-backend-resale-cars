@@ -5,6 +5,8 @@ import validateSchema from '@/shared/utils/validateSchema'
 
 interface IParams {
     page: number
+    user: number
+    type: string
 }
 
 interface IReturn {
@@ -15,7 +17,11 @@ interface IReturn {
 export default async (data: IParams): Promise<IReturn> => {
     const validatedQueryParams = await validateSchema(ActionValidation.history, data)
 
-    const response = await ActionRepository.find(validatedQueryParams.page)
+    const response = await ActionRepository.find(
+        validatedQueryParams.page,
+        validatedQueryParams.user,
+        validatedQueryParams.type
+    )
 
     return response
 }

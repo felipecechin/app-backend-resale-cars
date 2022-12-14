@@ -14,7 +14,9 @@ export default async (
     next: NextFunction
 ): Promise<Response<IResponseBody>> => {
     const queryParams = req.query
-    const { total, actions } = await ActionService.history(queryParams as unknown as { page: number })
+    const { total, actions } = await ActionService.history(
+        queryParams as unknown as { page: number; user: number; type: string }
+    )
 
     return res.status(200).send({ total, actions })
 }

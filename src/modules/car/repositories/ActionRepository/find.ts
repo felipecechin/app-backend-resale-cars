@@ -6,9 +6,9 @@ interface IFindReturn {
     actions: ActionModel[]
 }
 
-export default async (page?: number): Promise<IFindReturn> => {
+export default async (page?: number, user?: number, type?: string): Promise<IFindReturn> => {
     page = page || 1
-    const [items, count] = await dataRepositories.actionRepository
+    const queryBuilder = dataRepositories.actionRepository
         .createQueryBuilder('actions')
         .select('actions')
         .addSelect('cars.brand')
@@ -17,6 +17,16 @@ export default async (page?: number): Promise<IFindReturn> => {
         .withDeleted()
         .leftJoin('actions.car', 'cars')
         .leftJoin('actions.user', 'users')
+
+    if (user) {
+        queryBuilder.andWhere('actions.user_id = :user', { user })
+    }
+
+    if (type) {
+        queryBuilder.andWhere('actions.type = :type', { type })
+    }
+
+    const [items, count] = await queryBuilder
         .skip((page - 1) * 5)
         .take(5)
         .getManyAndCount()
