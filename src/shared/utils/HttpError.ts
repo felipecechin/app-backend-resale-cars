@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const errors: { [key: string]: string } = {
     400: 'BadRequest',
     401: 'Unauthorized',
