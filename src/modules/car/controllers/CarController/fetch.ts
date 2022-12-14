@@ -14,7 +14,7 @@ export default async (
     next: NextFunction
 ): Promise<Response<IResponseBody>> => {
     const queryParams = req.query
-    const { total, cars } = await CarService.fetch(queryParams)
+    const { total, cars } = await CarService.fetch(queryParams as unknown as { search: string; page: number })
 
     return res.status(200).send({ total, cars })
 }

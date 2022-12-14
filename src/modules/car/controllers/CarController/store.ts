@@ -15,9 +15,12 @@ export default async (
     res: Response<IResponseBody>,
     next: NextFunction
 ): Promise<Response<IResponseBody>> => {
-    const car = await CarService.store({
-        ...req.body,
-    })
+    const car = await CarService.store(
+        {
+            ...req.body,
+        },
+        Number(req.user?.id)
+    )
 
     return res.status(200).send({ car })
 }

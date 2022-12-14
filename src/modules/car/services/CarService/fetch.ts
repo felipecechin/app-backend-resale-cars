@@ -4,8 +4,8 @@ import CarValidation from '@/modules/car/validations/CarValidation'
 import validateSchema from '@/shared/utils/validateSchema'
 
 interface IParams {
-    search?: string
-    page?: number
+    search: string
+    page: number
 }
 
 interface IReturn {

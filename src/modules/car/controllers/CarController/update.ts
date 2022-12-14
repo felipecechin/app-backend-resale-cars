@@ -10,19 +10,18 @@ interface IResponseBody {
     car: CarModel
 }
 
-interface IRequestParams {
-    id: string
-}
-
 export default async (
-    req: Request<IRequestParams, any, TRequestBody>,
+    req: Request<any, any, TRequestBody>,
     res: Response<IResponseBody>,
     next: NextFunction
 ): Promise<Response<IResponseBody>> => {
-    const car = await CarService.update({
-        ...req.body,
-        id: Number(req.params.id),
-    })
+    const car = await CarService.update(
+        {
+            ...req.body,
+            id: Number(req.params.id),
+        },
+        Number(req.user?.id)
+    )
 
     return res.status(200).send({ car })
 }
