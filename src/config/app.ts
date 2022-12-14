@@ -24,7 +24,13 @@ createConnection()
         //     .where('id = :id', { id: 1 })
         //     .execute()
         // console.log('ok')
-        // const cars = await dataRepositories.carRepository.find()
+        // const cars = await dataRepositories.carRepository
+        //     .createQueryBuilder('cars')
+        //     .where('cars.brand LIKE :brand', { brand: '%gol%' })
+        //     .orWhere('cars.model LIKE :model', { model: '%gol%' })
+        //     .skip(0)
+        //     .take(5)
+        //     .getManyAndCount()
         // console.log(cars)
         // const createdAction = await dataRepositories.actionRepository.save({
         //     carId: 1,

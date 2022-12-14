@@ -7,5 +7,6 @@ const carRoutes = Router()
 carRoutes.post('/', CarController.store)
 carRoutes.put('/:id', CarController.update)
 carRoutes.delete('/:id', CarController.remove)
+carRoutes.get('/', CarController.fetch)
 
 export default carRoutes
