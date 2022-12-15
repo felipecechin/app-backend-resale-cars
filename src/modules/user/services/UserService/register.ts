@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import bcrypt from 'bcrypt'
 
+import generateJwtAndRefreshToken from '@/modules/user/utils/generateJwtAndRefreshToken'
 import HttpError from '@/shared/utils/HttpError'
 import { UserModel } from '@/modules/user/database/models/UserModel'
 import UserRepository from '@/modules/user/repositories/UserRepository'
@@ -14,7 +15,13 @@ interface IParams {
     confirmPassword: string
 }
 
-export default async (data: IParams): Promise<Pick<UserModel, 'email' | 'id' | 'name'>> => {
+interface IReturn {
+    access_token: string
+    refresh_token: string
+    user: Pick<UserModel, 'email' | 'id' | 'name'>
+}
+
+export default async (data: IParams): Promise<IReturn> => {
     const { name, email, password, confirmPassword } = await validateSchema(UserValidations.register, data)
 
     const userExists = await UserRepository.findByEmail(email)
@@ -37,5 +44,12 @@ export default async (data: IParams): Promise<Pick<UserModel, 'email' | 'id' | '
 
     const createdUser = await UserRepository.create(newUser)
 
-    return _.omit(createdUser, 'password')
+    const userWithoutPassword = _.omit(createdUser, 'password')
+    const tokens = await generateJwtAndRefreshToken(userWithoutPassword.id, userWithoutPassword)
+
+    return {
+        access_token: tokens.accessToken,
+        refresh_token: tokens.refreshToken,
+        user: userWithoutPassword,
+    }
 }

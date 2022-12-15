@@ -4,10 +4,7 @@ import { UserModel } from '@/modules/user/database/models/UserModel'
 import UserService from '@/modules/user/services/UserService'
 
 interface IResponseBody {
-    users: {
-        count: number
-        items: Array<Pick<UserModel, 'email' | 'id' | 'name'>>
-    }
+    users: Array<Pick<UserModel, 'email' | 'id' | 'name'>>
 }
 
 export default async (
@@ -15,8 +12,7 @@ export default async (
     res: Response<IResponseBody>,
     next: NextFunction
 ): Promise<Response<IResponseBody>> => {
-    const { page } = req.query
-    const users = await UserService.get({ page: Number(page) })
+    const users = await UserService.get()
 
     return res.status(200).send({ users })
 }

@@ -11,7 +11,9 @@ interface IRequestBody {
 }
 
 interface IResponseBody {
-    newUser: Pick<UserModel, 'email' | 'id' | 'name'>
+    access_token: string
+    refresh_token: string
+    user: Pick<UserModel, 'email' | 'id' | 'name'>
 }
 
 export default async (
@@ -19,9 +21,9 @@ export default async (
     res: Response<IResponseBody>,
     next: NextFunction
 ): Promise<Response<IResponseBody>> => {
-    const newUser = await UserService.register({
+    const response = await UserService.register({
         ...req.body,
     })
 
-    return res.status(200).send({ newUser })
+    return res.status(200).send(response)
 }
