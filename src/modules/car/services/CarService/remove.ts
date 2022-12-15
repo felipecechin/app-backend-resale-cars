@@ -15,7 +15,7 @@ export default async (data: IParams, userId: number): Promise<number> => {
     await ActionRepository.create({
         carId: validatedData.id,
         userId,
-        type: 'C',
+        type: 'D',
     })
 
     return removedCar
