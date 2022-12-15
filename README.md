@@ -1,20 +1,60 @@
-## Repositório modelo
-Este repositório serve como template para criação de aplicações back-end utilizando as seguintes tecnologias:
+## Aplicação back-end para revenda de carros
+A aplicação foi criada utilizando utilizando as seguintes tecnologias:
 - Node + Express;
 - Typescript;
 - TypeORM com MySQL.
 
-O repositório já inclui:
-- ESLint e regras;
-- Prettier;
-- Ambiente dev e ambiente de produção;
-- Ambiente de testes unitários com Mocha;
-- Dois módulos de exemplo:
-    - Todo (pasta `src/modules/todo`): CRUD de tarefas;
-    - User (pasta `src/modules/user`): Autenticação, registro e busca de usuários.
-        - Inclui autenticação JWT e middleware para proteção de rotas (pasta `src/shared/middlewares/ensureAuthenticated.ts`);
-        - Inclui rota para realizar RefreshToken.
+### Endpoints da aplicação:
 
-### Pontos a serem melhorados:
-- [ ] Adicionar testes de integração;
-- [ ] Adicionar Swagger;
+#### Endpoints não protegidos por token:
+- `POST` `users/register`:
+    - Exemplo de `body`:
+        ```json
+        {
+            "name": "Felipe Cechin",
+            "email": "ficechin@hotmail.com",
+            "password": "123456",
+            "confirmPassword": "123456"
+        }
+        ```
+
+- `POST` `users/login`:
+    - Exemplo de `body`:
+        ```json
+        {
+            "email": "ficechin@hotmail.com",
+            "password": "123456"
+        }
+        ```
+
+#### Endpoints protegidos por token:
+
+Token deve ser enviado no cabeçalho da requisição, contendo `Authorization`: `Bearer <<TOKEN>>`
+
+- `GET` `users`;
+- `GET` `cars`;
+- `POST` `cars`:
+    - Exemplo de `body`:
+        ```json
+        {
+            "brand": "Fiat",
+            "model": "Uno",
+            "km": 120,
+            "color": "Branco",
+            "transmission": "Manual"
+        }
+        ```
+- `PUT` `cars/:id`:
+    - Exemplo de `body`:
+        ```json
+        {
+            "brand": "Fiat",
+            "model": "Uno",
+            "km": 120,
+            "color": "Branco",
+            "transmission": "Manual"
+        }
+        ```
+- `DELETE` `cars/:id`;
+- `GET` `actions/history`;
+- `GET` `actions/dashboard`;
